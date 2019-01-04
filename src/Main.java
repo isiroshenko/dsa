@@ -1,11 +1,12 @@
 import impl.DoubleLinkedList;
+import interfaces.MyLinkedList;
 import impl.SingleLinkedList;
 
 public class Main {
 
     public static void main(String[] args) {
         /*single linked list*/
-        SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<>();
+        MyLinkedList<Integer> singleLinkedList = new SingleLinkedList<>();
         singleLinkedList.add(5);
         singleLinkedList.add(7);
         singleLinkedList.add(9);
@@ -16,6 +17,14 @@ public class Main {
         System.out.println(singleLinkedList.reverseTraversalWithAddToList());
 
         /*double linked list*/
-        DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
+        MyLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
+        doubleLinkedList.add(5);
+        doubleLinkedList.add(7);
+        doubleLinkedList.add(9);
+        doubleLinkedList.add(11);
+        System.out.println(doubleLinkedList.contains(0));
+        System.out.println(doubleLinkedList.delete(9));
+        System.out.println(doubleLinkedList.traversalWithAddToList());
+        System.out.println(doubleLinkedList.reverseTraversalWithAddToList());
     }
 }

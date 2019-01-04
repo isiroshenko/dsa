@@ -1,9 +1,11 @@
 package impl;
 
+import interfaces.MyLinkedList;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SingleLinkedList<T> {
+public class SingleLinkedList<T> implements MyLinkedList<T> {
 
     private Node<T> head;
     private Node<T> last;
@@ -18,8 +20,9 @@ public class SingleLinkedList<T> {
         }
     }
 
+    @Override
     public void add(T value) {
-        Node<T> element = new Node<T>(value, null);
+        Node<T> element = new Node<>(value, null);
         if (head == null) {
             head = element;
             last = element;
@@ -29,6 +32,7 @@ public class SingleLinkedList<T> {
         }
     }
 
+    @Override
     public boolean contains(T value) {
         Node<T> head = this.head;
         while (head != null) {
@@ -38,6 +42,7 @@ public class SingleLinkedList<T> {
         return false;
     }
 
+    @Override
     public boolean delete(T value) {
         Node<T> currentHead = this.head;
         if (this.head == null) return false;
@@ -63,6 +68,7 @@ public class SingleLinkedList<T> {
         return false;
     }
 
+    @Override
     public List<T> traversalWithAddToList() {
         List<T> list = new ArrayList<>();
         Node<T> node = head;
@@ -73,6 +79,7 @@ public class SingleLinkedList<T> {
         return list;
     }
 
+    @Override
     public List<T> reverseTraversalWithAddToList() {
         List<T> list = new ArrayList<>();
         Node<T> current = last;
