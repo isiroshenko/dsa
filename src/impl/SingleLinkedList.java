@@ -22,6 +22,7 @@ public class SingleLinkedList<T> implements MyLinkedList<T> {
 
     @Override
     public void add(T value) {
+        if (value == null) throw new IllegalArgumentException("You can't write null");
         Node<T> element = new Node<>(value, null);
         if (head == null) {
             head = element;
@@ -34,6 +35,7 @@ public class SingleLinkedList<T> implements MyLinkedList<T> {
 
     @Override
     public boolean contains(T value) {
+        if (value == null) throw new IllegalArgumentException("You can't write null");
         Node<T> head = this.head;
         while (head != null) {
             if ((head.value).equals(value)) return true;
@@ -44,6 +46,7 @@ public class SingleLinkedList<T> implements MyLinkedList<T> {
 
     @Override
     public boolean delete(T value) {
+        if (value == null) throw new IllegalArgumentException("You can't write null");
         Node<T> currentHead = this.head;
         if (this.head == null) return false;
         if (this.head.value.equals(value)) {

@@ -24,6 +24,7 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
 
     @Override
     public void add(T value) {
+        if (value == null) throw new IllegalArgumentException("You can't add null");
         Node<T> element = new Node<>(null, value, null);
         if (head == null) {
             head = element;
@@ -37,6 +38,7 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
 
     @Override
     public boolean contains(T value) {
+        if (value == null) throw new IllegalArgumentException("You can't write null");
         Node<T> head = this.head;
         while (head != null) {
             if ((head.value).equals(value)) return true;
@@ -47,6 +49,7 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
 
     @Override
     public boolean delete(T value) {
+        if (value == null) throw new IllegalArgumentException("You can't delete null");
         Node<T> currentHead = head;
         if (currentHead == null) return false;
         if (currentHead.value.equals(value)) {
@@ -63,13 +66,12 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
         while ((currentHead != null) && (!currentHead.value.equals(value))) {
             currentHead = currentHead.next;
         }
-        if(currentHead == last){
+        if (currentHead == last) {
             last = last.previous;
             last.next = null;
             return true;
-        }
-        else if (currentHead != null){
-            currentHead.previous.next =currentHead.next;
+        } else if (currentHead != null) {
+            currentHead.previous.next = currentHead.next;
             currentHead.next.previous = currentHead.previous;
             return true;
         }
@@ -92,9 +94,9 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
     public List<T> reverseTraversalWithAddToList() {
         List<T> list = new ArrayList<>();
         Node<T> current = last;
-        while(last != null){
+        while (current != null) {
             list.add(current.value);
-            current = last.previous;
+            current = current.previous;
         }
         return list;
     }
