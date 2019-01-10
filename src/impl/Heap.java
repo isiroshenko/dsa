@@ -1,17 +1,15 @@
 package impl;
 
 import java.lang.reflect.Array;
-import java.util.Optional;
 
-public class Heap<T extends Comparable<T>>  {
+public class Heap<T extends Comparable<T>> {
 
     private T[] heap;
     private int count;
 
 
     public Heap(Class<T> tClass, int capacity) {
-        @SuppressWarnings("unchecked")
-        final T[] heap =  (T[]) Array.newInstance(tClass, capacity);
+        @SuppressWarnings("unchecked") final T[] heap = (T[]) Array.newInstance(tClass, capacity);
         this.heap = heap;
     }
 
@@ -73,11 +71,17 @@ public class Heap<T extends Comparable<T>>  {
         return true;
     }
 
-    public boolean contains(T value){
+    public boolean contains(T value) {
         int i = 0;
-        while ((i < count) && (!heap[i].equals(value))){
+        while ((i < count) && (!heap[i].equals(value))) {
             i++;
         }
         return i < count;
+    }
+
+    public void traversal() {
+        for (int i = 0; i < count; i++) {
+            System.out.print(heap[i].toString() + " ");
+        }
     }
 }

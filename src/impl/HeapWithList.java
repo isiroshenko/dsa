@@ -9,15 +9,18 @@ public class HeapWithList<T extends Comparable<T>> {
 
     private int size;
 
-    public HeapWithList(int size){
+    private int count;
+
+    public HeapWithList(int size) {
         this.size = size;
         list = new ArrayList<>(size);
     }
 
 
-    public void add(T value){
-        if(list.size() == size) throw new ArrayIndexOutOfBoundsException("Capacity is " + size + " elements");
+    public void add(T value) {
+        if (list.size() == size) throw new ArrayIndexOutOfBoundsException("Capacity is " + size + " elements");
         list.add(value);
+        count++;
         minHeapify();
     }
 
@@ -55,10 +58,17 @@ public class HeapWithList<T extends Comparable<T>> {
             left = index * 2 + 1;
             right = index * 2 + 2;
         }
+        this.count--;
         return true;
     }
 
-    public boolean contains(T value){
+    public boolean contains(T value) {
         return list.contains(value);
+    }
+
+    public void traversal() {
+        for (int i = 0; i < count; i++) {
+            System.out.print(list.get(i).toString() + " ");
+        }
     }
 }

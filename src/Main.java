@@ -81,10 +81,13 @@ public class Main {
         System.out.println("Heap with list inside:");
         System.out.println("Was element 1 deleted: " + heap.remove(1));
         System.out.println("Contains 9: " + heap.contains(9));
+        System.out.print("Traversal: ");
+        heap.traversal();
+        System.out.println();
     }
 
-    private static void verifyHeap(){
-        Heap<Integer> heap = new Heap<>(Integer.class,10);
+    private static void verifyHeap() {
+        Heap<Integer> heap = new Heap<>(Integer.class, 10);
         heap.add(1);
         heap.add(3);
         heap.add(9);
@@ -94,5 +97,8 @@ public class Main {
         System.out.println("Heap:");
         System.out.println("Was element 1 deleted: " + heap.remove(1));
         System.out.println("Contains 9: " + heap.contains(9));
+        System.out.print("Traversal: ");
+        heap.traversal();
+        System.out.println();
     }
 }
