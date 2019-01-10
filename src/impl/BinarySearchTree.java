@@ -3,21 +3,11 @@ package impl;
 
 import java.util.*;
 
-public class BinarySearchTree<T extends Number> {
+public class BinarySearchTree<T extends Comparable<T>> {
 
     private Node<T> root;
 
     private long size;
-
-    private static class Node<T extends Number> {
-        Node<T> left;
-        Node<T> right;
-        T value;
-
-        Node(T value) {
-            this.value = value;
-        }
-    }
 
     public long size() {
         return size;
@@ -32,7 +22,7 @@ public class BinarySearchTree<T extends Number> {
     }
 
     private void insertNode(Node<T> node, T value) {
-        if (value.doubleValue() < node.value.doubleValue()) {
+        if (value.compareTo(node.value) < 0) {
             if (node.left == null) {
                 node.left = new Node<>(value);
                 size++;
@@ -57,7 +47,7 @@ public class BinarySearchTree<T extends Number> {
     private boolean contains(Node<T> node, T value) {
         if (node == null) return false;
         if (node.value.equals(value)) return true;
-        if (value.doubleValue() < node.value.doubleValue()) {
+        if (value.compareTo(node.value) < 0) {
             return contains(node.left, value);
         } else {
             return contains(node.right, value);
@@ -65,11 +55,11 @@ public class BinarySearchTree<T extends Number> {
     }
 
     private Optional<Node<T>> findParent(Node<T> root, T value) {
-        if (value.doubleValue() == root.value.doubleValue()) return Optional.empty();
-        if (value.doubleValue() < root.value.doubleValue()) {
+        if (value.compareTo(root.value) == 0) return Optional.empty();
+        if (value.compareTo(root.value) < 0) {
             if (root.left == null) {
                 return Optional.empty();
-            } else if (root.left.value.doubleValue() == value.doubleValue()) {
+            } else if (root.left.value.compareTo(value) == 0) {
                 return Optional.of(root);
             } else {
                 return findParent(root.left, value);
@@ -77,7 +67,7 @@ public class BinarySearchTree<T extends Number> {
         } else {
             if (root.right == null) {
                 return Optional.empty();
-            } else if (root.right.value.doubleValue() == value.doubleValue()) {
+            } else if (root.right.value.compareTo(value) == 0) {
                 return Optional.of(root);
             } else {
                 return findParent(root.right, value);
@@ -85,17 +75,15 @@ public class BinarySearchTree<T extends Number> {
         }
     }
 
-
     private Optional<Node<T>> findNode(Node<T> root, T value) {
         if (root == null) return Optional.empty();
-        if (root.value.doubleValue() == value.doubleValue()) return Optional.of(root);
-        else if (value.doubleValue() < root.value.doubleValue()) {
+        if (root.value.compareTo(value) == 0) return Optional.of(root);
+        else if (value.compareTo(root.value) < 0) {
             return findNode(root.left, value);
         } else {
             return findNode(root.right, value);
         }
     }
-
 
     public boolean remove(T value) {
         if (value == null) throw new IllegalArgumentException("You can write only numbers");
@@ -112,19 +100,19 @@ public class BinarySearchTree<T extends Number> {
         if (size == 1) {
             root = null;
         } else if ((nodeToRemove.left == null) && (nodeToRemove.right == null)) {
-            if (nodeToRemove.value.doubleValue() < parent.value.doubleValue()) {
+            if (nodeToRemove.value.compareTo(parent.value) < 0) {
                 parent.left = null;
             } else {
                 parent.right = null;
             }
         } else if (nodeToRemove.left == null) {
-            if (nodeToRemove.value.doubleValue() < parent.value.doubleValue()) {
+            if (nodeToRemove.value.compareTo(parent.value) < 0) {
                 parent.left = nodeToRemove.right;
             } else {
                 parent.right = nodeToRemove.right;
             }
         } else if (nodeToRemove.right == null) {
-            if (nodeToRemove.value.doubleValue() < parent.value.doubleValue()) {
+            if (nodeToRemove.value.compareTo(parent.value) < 0) {
                 parent.left = nodeToRemove.left;
             } else {
                 parent.right = nodeToRemove.left;
@@ -144,23 +132,23 @@ public class BinarySearchTree<T extends Number> {
         return true;
     }
 
-    public double findMin() {
+    public T findMin() {
         return findMin(root);
     }
 
-    private double findMin(Node<T> node) {
+    private T findMin(Node<T> node) {
         if (node == null) throw new IllegalArgumentException("You can't write nulls here");
-        if (node.left == null) return node.value.doubleValue();
+        if (node.left == null) return node.value;
         else return findMin(node.left);
     }
 
-    public double findMax() {
+    public T findMax() {
         return findMax(root);
     }
 
-    private double findMax(Node<T> node) {
+    private T findMax(Node<T> node) {
         if (node == null) throw new IllegalArgumentException("You can't write nulls here");
-        if (node.right == null) return node.value.doubleValue();
+        if (node.right == null) return node.value;
         else return findMax(node.right);
     }
 
@@ -222,5 +210,15 @@ public class BinarySearchTree<T extends Number> {
             }
         }
         return list;
+    }
+
+    private static class Node<T extends Comparable<T>> {
+        Node<T> left;
+        Node<T> right;
+        T value;
+
+        Node(T value) {
+            this.value = value;
+        }
     }
 }

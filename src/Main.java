@@ -1,19 +1,15 @@
-import impl.BinarySearchTree;
-import impl.DoubleLinkedList;
-import impl.Heap;
-import impl.SingleLinkedList;
+import impl.*;
 import interfaces.MyLinkedList;
-
-import java.sql.SQLOutput;
 
 
 public class Main {
 
     public static void main(String[] args) {
-//        verifySingleLinkedList();
-//        verifyDoubleLinkedList();
-//        verifyBinarySearchTree();
+        verifySingleLinkedList();
+        verifyDoubleLinkedList();
+        verifyBinarySearchTree();
         verifyHeap();
+        verifyHeapWithList();
     }
 
     /*single linked list*/
@@ -74,16 +70,29 @@ public class Main {
         System.out.println(binarySearchTree.breadthFirst());
     }
 
-    private static void verifyHeap(){
-        Heap<Integer> heap = new Heap<>(5);
+    private static void verifyHeapWithList() {
+        HeapWithList<Integer> heap = new HeapWithList<>(10);
+        heap.add(1);
         heap.add(3);
         heap.add(9);
         heap.add(12);
-        heap.add(7);
-        heap.add(1);
-        heap.add(15);
-        heap.add(18);
-        heap.add(8);
+        heap.add(13);
         System.out.println();
+        System.out.println("Heap with list inside:");
+        System.out.println("Was element 1 deleted: " + heap.remove(1));
+        System.out.println("Contains 9: " + heap.contains(9));
+    }
+
+    private static void verifyHeap(){
+        Heap<Integer> heap = new Heap<>(Integer.class,10);
+        heap.add(1);
+        heap.add(3);
+        heap.add(9);
+        heap.add(12);
+        heap.add(13);
+        System.out.println();
+        System.out.println("Heap:");
+        System.out.println("Was element 1 deleted: " + heap.remove(1));
+        System.out.println("Contains 9: " + heap.contains(9));
     }
 }

@@ -10,16 +10,6 @@ public class SingleLinkedList<T> implements MyLinkedList<T> {
     private Node<T> head;
     private Node<T> last;
 
-    private static class Node<T> {
-        T value;
-        Node<T> next;
-
-        Node(T value, Node<T> next) {
-            this.value = value;
-            this.next = next;
-        }
-    }
-
     @Override
     public void add(T value) {
         if (value == null) throw new IllegalArgumentException("You can't write null");
@@ -97,5 +87,15 @@ public class SingleLinkedList<T> implements MyLinkedList<T> {
         }
         list.add(current.value);
         return list;
+    }
+
+    private static class Node<T> {
+        T value;
+        Node<T> next;
+
+        Node(T value, Node<T> next) {
+            this.value = value;
+            this.next = next;
+        }
     }
 }

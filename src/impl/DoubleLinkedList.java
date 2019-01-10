@@ -10,18 +10,6 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
     private Node<T> head;
     private Node<T> last;
 
-    private static class Node<T> {
-        Node<T> previous;
-        T value;
-        Node<T> next;
-
-        Node(Node<T> previous, T value, Node<T> next) {
-            this.previous = previous;
-            this.value = value;
-            this.next = next;
-        }
-    }
-
     @Override
     public void add(T value) {
         if (value == null) throw new IllegalArgumentException("You can't add null");
@@ -78,7 +66,6 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
         return false;
     }
 
-
     @Override
     public List<T> traversalWithAddToList() {
         List<T> list = new ArrayList<>();
@@ -99,5 +86,17 @@ public class DoubleLinkedList<T> implements MyLinkedList<T> {
             current = current.previous;
         }
         return list;
+    }
+
+    private static class Node<T> {
+        Node<T> previous;
+        T value;
+        Node<T> next;
+
+        Node(Node<T> previous, T value, Node<T> next) {
+            this.previous = previous;
+            this.value = value;
+            this.next = next;
+        }
     }
 }
